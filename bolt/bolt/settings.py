@@ -10,6 +10,18 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
+import os, sys
+
+abspath = lambda *p: os.path.abspath(os.path.join(*p))
+
+PROJECT_ROOT = abspath(os.path.dirname(__file__))
+sys.path.insert(0, PROJECT_ROOT)
+
+TEMPLATE_DIRS = (
+    abspath(PROJECT_ROOT, 'templates'), # this will point to mysite/mysite/templates
+)
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -58,8 +70,11 @@ WSGI_APPLICATION = 'bolt.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'db',                      
+        'USER': 'blake',
+        'HOST': '54.183.159.21',
+        'PORT': '',
     }
 }
 
